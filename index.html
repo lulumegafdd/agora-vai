@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="salt pepper: hamburgueria artesanal com cardápio digital, delivery rápido e pedidos seguros pelo WhatsApp.">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https://images.unsplash.com data:; font-src 'self'; connect-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; media-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'; upgrade-insecure-requests;">
+  <title>salt pepper | Hamburgueria Artesanal e Delivery</title>
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1800&q=85">
+  <style>
+    :root {
+      color-scheme: light;
+      --red-900: #8f0710;
+      --red-700: #c4121f;
+      --red-600: #e01828;
+      --red-500: #ff2b3d;
+      --green-600: #25d366;
+      --ink-950: #161616;
+      --ink-850: #24201f;
+      --ink-700: #3d3836;
+      --ink-500: #68605d;
+      --paper: #fffaf5;
+      --white: #ffffff;
+      --gold: #f4b740;
+      --line: rgba(22, 22, 22, 0.12);
+      --shadow-soft: 0 18px 60px rgba(22, 22, 22, 0.16);
+      --shadow-card: 0 16px 42px rgba(143, 7, 16, 0.14);
+      --header-height: 76px;
+      --radius: 8px;
+      --max-width: 1180px;
+      --title-font: Poppins, Montserrat, Arial, sans-serif;
+      --body-font: Roboto, Arial, sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      letter-spacing: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      font-family: var(--body-font);
+      color: var(--ink-950);
+      background: var(--paper);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.72;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 10000;
+      padding: 0.75rem 1rem;
+      color: var(--ink-950);
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      transform: translateY(-140%);
+      transition: transform 180ms ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 9000;
+      min-height: var(--header-height);
+      background: rgba(255, 250, 245, 0.84);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.52);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .header-shell {
+      width: min(100% - 2rem, var(--max-width));
+      min-height: var(--header-height);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      width: fit-content;
+      color: var(--ink-950);
+      background: transparent;
+      font-family: var(--title-font);
+      font-weight: 900;
+      font-size: 1rem;
+      text-transform: lowercase;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      color: var(--white);
+      background:
+        linear-gradient(135deg, var(--red-700), var(--red-500));
+      border: 2px solid var(--ink-950);
+      border-radius: var(--radius);
+      box-shadow: 5px 5px 0 var(--ink-950);
+      font-weight: 900;
+    }
+
+    .brand-text {
+      display: grid;
+      line-height: 1;
+    }
+
+    .brand-text small {
+      margin-top: 0.28rem;
+      color: var(--red-700);
+      font-family: var(--body-font);
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .primary-nav {
+      position: fixed;
+      inset: var(--header-height) 1rem auto 1rem;
+      display: grid;
+      gap: 0.4rem;
+      padding: 0.8rem;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate3d(0, -12px, 0);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .primary-nav.is-open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .nav-link {
+      min-height: 44px;
+      padding: 0.72rem 1rem;
+      color: var(--ink-850);
+      background: transparent;
+      border-radius: var(--radius);
+      font-weight: 800;
+      text-align: left;
+      transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+    }
+
+    .nav-link:hover,
+    .nav-link[aria-current="page"] {
+      color: var(--red-700);
+      background: rgba(224, 24, 40, 0.08);
+      transform: translate3d(0, -1px, 0);
+    }
+
+    .order-button,
+    .hero-button,
+    .section-button,
+    .menu-order-button,
+    .submit-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      min-height: 46px;
+      padding: 0.82rem 1.05rem;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--red-700), var(--red-500));
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 28px rgba(196, 18, 31, 0.28);
+      font-family: var(--title-font);
+      font-weight: 900;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      will-change: transform;
+    }
+
+    .order-button:hover,
+    .hero-button:hover,
+    .section-button:hover,
+    .menu-order-button:hover,
+    .submit-button:hover {
+      transform: translate3d(0, -2px, 0);
+      box-shadow: 0 16px 34px rgba(196, 18, 31, 0.34);
+    }
+
+    .order-button {
+      display: none;
+      white-space: nowrap;
+    }
+
+    .menu-toggle {
+      display: inline-grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      color: var(--ink-950);
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .menu-toggle-lines,
+    .menu-toggle-lines::before,
+    .menu-toggle-lines::after {
+      display: block;
+      width: 21px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 99px;
+      transition: transform 180ms ease, opacity 180ms ease;
+      content: "";
+    }
+
+    .menu-toggle-lines::before {
+      transform: translateY(-7px);
+    }
+
+    .menu-toggle-lines::after {
+      transform: translateY(5px);
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle-lines {
+      transform: rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle-lines::before {
+      opacity: 0;
+      transform: translateY(0);
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle-lines::after {
+      transform: translateY(-2px) rotate(-90deg);
+    }
+
+    main {
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    .page-section {
+      display: none;
+      animation: sectionReveal 340ms ease both;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    .hero-section.active {
+      display: flex;
+    }
+
+    .hero-section {
+      position: relative;
+      min-height: 90vh;
+      align-items: center;
+      overflow: hidden;
+      color: var(--white);
+      background: var(--ink-950);
+      isolation: isolate;
+    }
+
+    .hero-section::before {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background-image: url("https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1800&q=85");
+      background-position: center;
+      background-size: cover;
+      transform: scale(1.02);
+      content: "";
+    }
+
+    .hero-section::after {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(13, 10, 9, 0.92) 0%, rgba(22, 22, 22, 0.74) 48%, rgba(22, 22, 22, 0.28) 100%),
+        radial-gradient(circle at 20% 30%, rgba(224, 24, 40, 0.28), transparent 35%);
+      content: "";
+    }
+
+    .hero-content {
+      width: min(100% - 2rem, var(--max-width));
+      margin: 0 auto;
+      padding: 5.5rem 0 4.5rem;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      animation: riseIn 520ms ease both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0 0 1rem;
+      color: var(--gold);
+      font-family: var(--title-font);
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 32px;
+      height: 3px;
+      background: currentColor;
+      border-radius: 99px;
+      content: "";
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: var(--title-font);
+      line-height: 1.05;
+    }
+
+    h1 {
+      max-width: 9ch;
+      font-size: 3.4rem;
+      font-weight: 900;
+      text-transform: lowercase;
+    }
+
+    .hero-subtitle {
+      max-width: 660px;
+      margin: 1.35rem 0 0;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 1.08rem;
+    }
+
+    .hero-actions,
+    .section-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.6rem;
+    }
+
+    .hero-button.secondary,
+    .section-button.secondary {
+      color: var(--ink-950);
+      background: var(--white);
+      box-shadow: 0 12px 28px rgba(255, 255, 255, 0.12);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      max-width: 660px;
+      margin-top: 2rem;
+    }
+
+    .stat-tile {
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      backdrop-filter: blur(12px);
+    }
+
+    .stat-value {
+      display: block;
+      color: var(--gold);
+      font-family: var(--title-font);
+      font-size: 1.35rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .stat-label {
+      display: block;
+      margin-top: 0.3rem;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.9rem;
+    }
+
+    .section-shell {
+      width: min(100% - 2rem, var(--max-width));
+      margin: 0 auto;
+      padding: 4.5rem 0;
+    }
+
+    .section-kicker {
+      margin: 0 0 0.7rem;
+      color: var(--red-700);
+      font-family: var(--title-font);
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      color: var(--ink-950);
+      font-size: 2.3rem;
+      font-weight: 900;
+    }
+
+    .section-lead {
+      max-width: 730px;
+      margin: 1rem 0 0;
+      color: var(--ink-500);
+      font-size: 1.02rem;
+    }
+
+    .menu-section {
+      background:
+        linear-gradient(180deg, var(--paper), var(--white));
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 0.6rem;
+      margin: 2rem 0 1.5rem;
+      padding: 0.35rem;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .filter-button {
+      flex: 0 0 auto;
+      min-height: 44px;
+      padding: 0.7rem 1rem;
+      color: var(--ink-850);
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      font-weight: 900;
+      transition: color 180ms ease, background 180ms ease, transform 180ms ease, border-color 180ms ease;
+    }
+
+    .filter-button:hover,
+    .filter-button.is-active {
+      color: var(--white);
+      background: var(--red-700);
+      border-color: var(--red-700);
+      transform: translate3d(0, -1px, 0);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .menu-grid.is-switching {
+      opacity: 0;
+      transform: translate3d(0, 8px, 0);
+    }
+
+    .menu-card {
+      display: grid;
+      overflow: hidden;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      animation: cardIn 260ms ease both;
+    }
+
+    .menu-media {
+      position: relative;
+      min-height: 210px;
+      background: var(--ink-850);
+      overflow: hidden;
+    }
+
+    .menu-media img {
+      width: 100%;
+      height: 100%;
+      min-height: 210px;
+      object-fit: cover;
+      transition: transform 260ms ease;
+    }
+
+    .menu-card:hover .menu-media img {
+      transform: scale(1.045);
+    }
+
+    .menu-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 0.42rem 0.6rem;
+      color: var(--ink-950);
+      background: var(--gold);
+      border-radius: var(--radius);
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .menu-body {
+      display: grid;
+      gap: 0.78rem;
+      padding: 1rem;
+    }
+
+    .menu-heading {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 0.85rem;
+    }
+
+    .menu-name {
+      color: var(--ink-950);
+      font-size: 1.18rem;
+      font-weight: 900;
+    }
+
+    .menu-price {
+      flex: 0 0 auto;
+      color: var(--red-700);
+      font-family: var(--title-font);
+      font-weight: 900;
+    }
+
+    .menu-description {
+      margin: 0;
+      color: var(--ink-500);
+      font-size: 0.94rem;
+    }
+
+    .menu-order-button {
+      width: 100%;
+      min-height: 44px;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.94rem;
+    }
+
+    .about-section,
+    .contact-section {
+      background: var(--white);
+    }
+
+    .split-layout {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .story-copy {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .story-list {
+      display: grid;
+      gap: 0.85rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .story-list li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.75rem;
+      align-items: start;
+      color: var(--ink-700);
+    }
+
+    .story-list li::before {
+      width: 12px;
+      height: 12px;
+      margin-top: 0.48rem;
+      background: var(--red-700);
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(224, 24, 40, 0.12);
+      content: "";
+    }
+
+    .image-panel {
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      background: var(--ink-850);
+    }
+
+    .image-panel img {
+      width: 100%;
+      min-height: 340px;
+      object-fit: cover;
+    }
+
+    .delivery-section {
+      color: var(--white);
+      background:
+        linear-gradient(135deg, rgba(143, 7, 16, 0.96), rgba(224, 24, 40, 0.9)),
+        url("https://images.unsplash.com/photo-1606755962773-d324e2dabd90?auto=format&fit=crop&w=1600&q=82") center/cover;
+      background-blend-mode: multiply;
+    }
+
+    .delivery-section .section-kicker,
+    .delivery-section .section-title,
+    .delivery-section .section-lead {
+      color: var(--white);
+    }
+
+    .delivery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .delivery-step {
+      min-height: 160px;
+      padding: 1.15rem;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      backdrop-filter: blur(12px);
+    }
+
+    .step-number {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 0.9rem;
+      color: var(--ink-950);
+      background: var(--gold);
+      border-radius: var(--radius);
+      font-family: var(--title-font);
+      font-weight: 900;
+    }
+
+    .delivery-step h3 {
+      font-size: 1.15rem;
+    }
+
+    .delivery-step p {
+      margin: 0.6rem 0 0;
+      color: rgba(255, 255, 255, 0.84);
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 1.4rem;
+      margin-top: 2rem;
+    }
+
+    .contact-panel,
+    .contact-form {
+      border-radius: var(--radius);
+    }
+
+    .contact-panel {
+      padding: 1.2rem;
+      color: var(--white);
+      background:
+        linear-gradient(135deg, rgba(22, 22, 22, 0.9), rgba(143, 7, 16, 0.9)),
+        url("https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=1400&q=82") center/cover;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .contact-panel h3 {
+      font-size: 1.45rem;
+    }
+
+    .contact-panel p {
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .contact-info {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .contact-info span {
+      display: block;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.86rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .contact-info strong {
+      display: block;
+      font-size: 1.04rem;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 1rem;
+      padding: 1.2rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-card);
+    }
+
+    .field-group {
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .field-group label {
+      color: var(--ink-850);
+      font-weight: 900;
+    }
+
+    .field-group input,
+    .field-group textarea {
+      width: 100%;
+      min-height: 48px;
+      padding: 0.82rem 0.9rem;
+      color: var(--ink-950);
+      background: var(--white);
+      border: 1px solid rgba(22, 22, 22, 0.18);
+      border-radius: var(--radius);
+      transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    }
+
+    .field-group textarea {
+      min-height: 142px;
+      resize: vertical;
+    }
+
+    .field-group input:focus,
+    .field-group textarea:focus {
+      border-color: var(--red-700);
+      box-shadow: 0 0 0 4px rgba(224, 24, 40, 0.12);
+      outline: none;
+      transform: translate3d(0, -1px, 0);
+    }
+
+    .form-feedback {
+      min-height: 1.5rem;
+      margin: 0;
+      color: var(--ink-700);
+      font-weight: 800;
+    }
+
+    .form-feedback.is-success {
+      color: #0f7b3a;
+    }
+
+    .form-feedback.is-error {
+      color: var(--red-700);
+    }
+
+    .submit-button {
+      width: 100%;
+    }
+
+    .site-footer {
+      color: var(--white);
+      background: var(--ink-950);
+    }
+
+    .footer-shell {
+      width: min(100% - 2rem, var(--max-width));
+      margin: 0 auto;
+      padding: 2rem 0;
+      display: grid;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .footer-copy {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .footer-nav button {
+      padding: 0.48rem 0.7rem;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius);
+      font-weight: 800;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 9999;
+      display: inline-grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 0.55rem;
+      min-height: 58px;
+      padding: 0.7rem 0.9rem;
+      color: var(--white);
+      background: var(--green-600);
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      border-radius: 999px;
+      box-shadow: 0 16px 40px rgba(37, 211, 102, 0.34);
+      font-family: var(--title-font);
+      font-weight: 900;
+      animation: pulseZap 2.8s ease-in-out infinite;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: translate3d(0, -3px, 0);
+      box-shadow: 0 18px 44px rgba(37, 211, 102, 0.42);
+    }
+
+    .whatsapp-icon {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      color: var(--green-600);
+      background: var(--white);
+      border-radius: 50%;
+      font-weight: 900;
+    }
+
+    @keyframes sectionReveal {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 18px, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 12px, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes pulseZap {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      50% {
+        transform: translate3d(0, -2px, 0);
+      }
+    }
+
+    @media (min-width: 520px) {
+      .hero-stats,
+      .delivery-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 760px) {
+      h1 {
+        font-size: 4.7rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+      }
+
+      .section-title {
+        font-size: 3rem;
+      }
+
+      .split-layout,
+      .contact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-shell {
+        grid-template-columns: 1fr auto;
+      }
+    }
+
+    @media (min-width: 960px) {
+      .header-shell {
+        grid-template-columns: 1fr auto 1fr;
+      }
+
+      .primary-nav {
+        position: static;
+        display: flex;
+        justify-content: center;
+        padding: 0;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+      }
+
+      .nav-actions {
+        justify-content: flex-end;
+      }
+
+      .order-button {
+        display: inline-flex;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1280px) {
+      h1 {
+        font-size: 5.4rem;
+      }
+
+      .section-shell {
+        padding: 5.4rem 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo</a>
+
+  <header class="site-header" role="banner">
+    <div class="header-shell">
+      <a class="brand" href="#home" data-section-target="home" aria-label="salt pepper, ir para a página inicial">
+        <span class="brand-mark" aria-hidden="true">sp</span>
+        <span class="brand-text">
+          <span data-config-field="company">salt pepper</span>
+          <small>burger delivery</small>
+        </span>
+      </a>
+
+      <nav class="primary-nav" id="primary-navigation" aria-label="Navegação principal">
+        <button class="nav-link" type="button" data-section-target="home" aria-current="page">Home</button>
+        <button class="nav-link" type="button" data-section-target="cardapio">Cardápio</button>
+        <button class="nav-link" type="button" data-section-target="sobre">Sobre</button>
+        <button class="nav-link" type="button" data-section-target="delivery">Delivery</button>
+        <button class="nav-link" type="button" data-section-target="contato">Contato</button>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="order-button" type="button" data-whatsapp-action="pedido" aria-label="Pedir agora pelo WhatsApp">Pedir Agora</button>
+        <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="primary-navigation" aria-expanded="false">
+          <span class="menu-toggle-lines" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo-principal" tabindex="-1">
+    <section class="page-section hero-section active" data-section="home" tabindex="-1" aria-labelledby="home-title">
+      <div class="hero-content">
+        <div class="hero-copy">
+          <p class="eyebrow">Hamburgueria artesanal</p>
+          <h1 id="home-title" data-config-field="company">salt pepper</h1>
+          <p class="hero-subtitle">Burgers altos, pão macio, chapa quente e entrega rápida para matar sua fome com visual retro moderno e sabor de hamburgueria premium.</p>
+          <div class="hero-actions" aria-label="Ações principais">
+            <button class="hero-button" type="button" data-section-target="cardapio" aria-label="Ver cardápio digital">Ver Cardápio</button>
+            <button class="hero-button secondary" type="button" data-whatsapp-action="duvida" aria-label="Pedir no WhatsApp">Pedir no Zap</button>
+          </div>
+          <div class="hero-stats" aria-label="Destaques da salt pepper">
+            <div class="stat-tile">
+              <span class="stat-value">180g</span>
+              <span class="stat-label">blend artesanal selado na chapa</span>
+            </div>
+            <div class="stat-tile">
+              <span class="stat-value">30min</span>
+              <span class="stat-label">preparo e rota com foco em velocidade</span>
+            </div>
+            <div class="stat-tile">
+              <span class="stat-value">100%</span>
+              <span class="stat-label">pedido direto pelo WhatsApp seguro</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section menu-section" data-section="cardapio" tabindex="-1" aria-labelledby="menu-title">
+      <div class="section-shell">
+        <p class="section-kicker">Cardápio digital</p>
+        <h2 class="section-title" id="menu-title">Escolha seu combo sem perder tempo.</h2>
+        <p class="section-lead">Filtros rápidos, imagens grandes e pedido direto no WhatsApp. Tudo pensado para você decidir em poucos cliques.</p>
+
+        <div class="filter-bar" role="tablist" aria-label="Filtros do cardápio">
+          <button class="filter-button is-active" type="button" role="tab" aria-selected="true" data-filter="todos">Todos</button>
+          <button class="filter-button" type="button" role="tab" aria-selected="false" data-filter="burgers">Burgers</button>
+          <button class="filter-button" type="button" role="tab" aria-selected="false" data-filter="acompanhamentos">Acompanhamentos</button>
+          <button class="filter-button" type="button" role="tab" aria-selected="false" data-filter="bebidas">Bebidas</button>
+        </div>
+
+        <div class="menu-grid" data-menu-grid aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="page-section about-section" data-section="sobre" tabindex="-1" aria-labelledby="about-title">
+      <div class="section-shell split-layout">
+        <div class="story-copy">
+          <p class="section-kicker">Sobre a casa</p>
+          <h2 class="section-title" id="about-title">Artesanal, direto e sem firula.</h2>
+          <p class="section-lead">A salt pepper nasceu para entregar hambúrguer com cara de noite boa: blend suculento, queijo derretendo, molho autoral e embalagem pensada para chegar bonito.</p>
+          <ul class="story-list" aria-label="Diferenciais da hamburgueria">
+            <li>Pães selecionados, selados no ponto certo para preservar textura.</li>
+            <li>Molhos da casa com equilíbrio entre acidez, cremosidade e picância.</li>
+            <li>Operação enxuta para pedidos rápidos, rastreáveis e sem complicação.</li>
+          </ul>
+          <div class="section-actions">
+            <button class="section-button" type="button" data-section-target="cardapio">Explorar Cardápio</button>
+          </div>
+        </div>
+        <figure class="image-panel" aria-label="Hambúrguer artesanal em destaque">
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1300&q=82" alt="Hambúrguer artesanal com queijo derretido e batatas" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+        </figure>
+      </div>
+    </section>
+
+    <section class="page-section delivery-section" data-section="delivery" tabindex="-1" aria-labelledby="delivery-title">
+      <div class="section-shell">
+        <p class="section-kicker">Delivery rápido</p>
+        <h2 class="section-title" id="delivery-title">Do clique ao burger na porta.</h2>
+        <p class="section-lead">Pedidos pelo WhatsApp com mensagem pronta, atendimento direto e confirmação humana. Sem cadastro, sem backend, sem fricção.</p>
+        <div class="delivery-grid" aria-label="Etapas do delivery">
+          <article class="delivery-step">
+            <span class="step-number">1</span>
+            <h3>Escolha</h3>
+            <p>Filtre o cardápio, compare opções e selecione seu burger ou combo favorito.</p>
+          </article>
+          <article class="delivery-step">
+            <span class="step-number">2</span>
+            <h3>Chame no Zap</h3>
+            <p>O site monta uma mensagem segura e abre o atendimento direto no WhatsApp.</p>
+          </article>
+          <article class="delivery-step">
+            <span class="step-number">3</span>
+            <h3>Receba</h3>
+            <p>A equipe confirma endereço, forma de pagamento e inicia o preparo.</p>
+          </article>
+        </div>
+        <div class="section-actions">
+          <button class="section-button secondary" type="button" data-whatsapp-action="pedido">Pedir Agora</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section contact-section" data-section="contato" tabindex="-1" aria-labelledby="contact-title">
+      <div class="section-shell">
+        <p class="section-kicker">Contato</p>
+        <h2 class="section-title" id="contact-title">Dúvida, pedido ou fome chegando?</h2>
+        <p class="section-lead">Envie sua mensagem e fale com a salt pepper pelo WhatsApp. A conversa abre com texto pronto e protegido.</p>
+
+        <div class="contact-grid">
+          <aside class="contact-panel" aria-label="Informações de contato">
+            <h3>Atendimento direto</h3>
+            <p>Ideal para tirar dúvidas, montar pedidos, combinar entrega e consultar promoções do dia.</p>
+            <div class="contact-info">
+              <p>
+                <span>WhatsApp</span>
+                <strong data-config-field="phone">Carregando contato</strong>
+              </p>
+              <p>
+                <span>E-mail</span>
+                <strong data-config-field="email">Carregando e-mail</strong>
+              </p>
+            </div>
+          </aside>
+
+          <form class="contact-form" data-contact-form>
+            <div class="field-group">
+              <label for="contact-name">Nome</label>
+              <input id="contact-name" name="name" type="text" required minlength="2" maxlength="60" pattern="[A-Za-zÀ-ÿ0-9\s'.-]{2,60}" autocomplete="name" inputmode="text" placeholder="Seu nome">
+            </div>
+            <div class="field-group">
+              <label for="contact-phone">Telefone <span aria-hidden="true">(opcional)</span></label>
+              <input id="contact-phone" name="phone" type="tel" minlength="8" maxlength="20" pattern="^\+?[0-9\s().-]{8,20}$" autocomplete="tel" inputmode="tel" placeholder="(85) 90000-0000">
+            </div>
+            <div class="field-group">
+              <label for="contact-message">Mensagem</label>
+              <textarea id="contact-message" name="message" required minlength="10" maxlength="500" autocomplete="off" placeholder="Conte o que você quer pedir ou perguntar"></textarea>
+            </div>
+            <p class="form-feedback" data-form-feedback role="status" aria-live="polite"></p>
+            <button class="submit-button" type="submit" data-submit-button aria-label="Enviar mensagem pelo WhatsApp">Enviar pelo WhatsApp</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-shell">
+      <p class="footer-copy"><span data-config-field="company">salt pepper</span> - burgers artesanais, delivery e atendimento direto.</p>
+      <nav class="footer-nav" aria-label="Navegação do rodapé">
+        <button type="button" data-section-target="home">Home</button>
+        <button type="button" data-section-target="cardapio">Cardápio</button>
+        <button type="button" data-section-target="delivery">Delivery</button>
+        <button type="button" data-section-target="contato">Contato</button>
+      </nav>
+    </div>
+  </footer>
+
+  <button class="whatsapp-float" type="button" data-whatsapp-action="duvida" aria-label="Abrir atendimento da salt pepper no WhatsApp">
+    <span class="whatsapp-icon" aria-hidden="true">WA</span>
+    <span>WhatsApp</span>
+  </button>
+
+  <script>
+    (() => {
+      "use strict";
+
+      // 1. CONFIG
+      const CONFIG = Object.freeze({
+        COMPANY_NAME: "salt pepper",
+        WHATSAPP_NUMBER: "5585999999999",
+        CONTACT_EMAIL: "contato@saltpepper.com.br"
+      });
+
+      // 2. UTILITÁRIOS
+      const qs = (selector, scope = document) => scope.querySelector(selector);
+      const qsa = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
+
+      function debounce(callback, delay) {
+        let timer = 0;
+        return (...args) => {
+          window.clearTimeout(timer);
+          timer = window.setTimeout(() => callback(...args), delay);
+        };
+      }
+
+      function createTextElement(tagName, className, text) {
+        const element = document.createElement(tagName);
+        if (className) {
+          element.className = className;
+        }
+        element.textContent = text;
+        return element;
+      }
+
+      function setButtonLoading(button, isLoading, loadingText) {
+        if (!button) {
+          return;
+        }
+
+        if (!button.dataset.originalText) {
+          button.dataset.originalText = button.textContent.trim();
+        }
+
+        button.disabled = isLoading;
+        button.setAttribute("aria-busy", String(isLoading));
+        button.textContent = isLoading ? loadingText : button.dataset.originalText;
+      }
+
+      function updateHeaderHeight() {
+        const header = qs(".site-header");
+        if (!header) {
+          return;
+        }
+        document.documentElement.style.setProperty("--header-height", `${header.offsetHeight}px`);
+      }
+
+      // 3. ESTADO GLOBAL
+      const state = {
+        activeSection: "home",
+        activeFilter: "todos",
+        menuOpen: false,
+        formLocked: false
+      };
+
+      // 4. DADOS
+      const MENU_ITEMS = Object.freeze([
+        {
+          id: "burger-smash-fire",
+          category: "burgers",
+          name: "Smash Fire",
+          description: "Dois smash burgers, cheddar cremoso, cebola caramelizada e molho pepper.",
+          price: "R$ 34,90",
+          badge: "Mais pedido",
+          image: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=1000&q=82",
+          alt: "Hambúrguer artesanal com queijo e pão macio"
+        },
+        {
+          id: "burger-salt-classic",
+          category: "burgers",
+          name: "Salt Classic",
+          description: "Blend 180g, queijo prato, alface crocante, tomate e maionese da casa.",
+          price: "R$ 31,90",
+          badge: "Clássico",
+          image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=82",
+          alt: "Hambúrguer com queijo, salada e batatas"
+        },
+        {
+          id: "burger-bbq-retro",
+          category: "burgers",
+          name: "BBQ Retro",
+          description: "Blend alto, bacon crocante, cheddar, picles e barbecue defumado.",
+          price: "R$ 38,90",
+          badge: "Defumado",
+          image: "https://images.unsplash.com/photo-1606755962773-d324e2dabd90?auto=format&fit=crop&w=1000&q=82",
+          alt: "Hambúrguer artesanal com bacon e queijo"
+        },
+        {
+          id: "side-crispy-fries",
+          category: "acompanhamentos",
+          name: "Crispy Fries",
+          description: "Batatas crocantes com sal da casa e molho especial para mergulhar.",
+          price: "R$ 17,90",
+          badge: "Crocante",
+          image: "https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=1000&q=82",
+          alt: "Porção de batatas fritas crocantes"
+        },
+        {
+          id: "side-onion-pop",
+          category: "acompanhamentos",
+          name: "Onion Pop",
+          description: "Anéis de cebola dourados, sequinhos e servidos com molho pepper.",
+          price: "R$ 19,90",
+          badge: "Molho pepper",
+          image: "https://images.unsplash.com/photo-1639024471283-03518883512d?auto=format&fit=crop&w=1000&q=82",
+          alt: "Anéis de cebola empanados"
+        },
+        {
+          id: "drink-red-soda",
+          category: "bebidas",
+          name: "Red Soda",
+          description: "Refrigerante gelado para acompanhar combos e burgers mais intensos.",
+          price: "R$ 8,90",
+          badge: "Gelada",
+          image: "https://images.unsplash.com/photo-1584329763901-8c7f193dc17b?auto=format&fit=crop&w=1000&q=82",
+          alt: "Bebida gelada com gás"
+        },
+        {
+          id: "drink-citrus-tea",
+          category: "bebidas",
+          name: "Citrus Tea",
+          description: "Chá cítrico gelado, leve e refrescante para equilibrar o pedido.",
+          price: "R$ 10,90",
+          badge: "Refrescante",
+          image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=1000&q=82",
+          alt: "Chá gelado cítrico em copo"
+        }
+      ]);
+
+      const SECTION_NAMES = Object.freeze(["home", "cardapio", "sobre", "delivery", "contato"]);
+
+      // 5. COMPONENTES
+      function createMenuCard(item) {
+        const article = document.createElement("article");
+        article.className = "menu-card";
+        article.setAttribute("data-category", item.category);
+
+        const media = document.createElement("div");
+        media.className = "menu-media";
+
+        const image = document.createElement("img");
+        image.alt = item.alt;
+        image.loading = "lazy";
+        image.decoding = "async";
+        image.referrerPolicy = "no-referrer";
+        image.src = getSafeImageUrl(item.image);
+
+        const badge = createTextElement("span", "menu-badge", item.badge);
+        media.appendChild(image);
+        media.appendChild(badge);
+
+        const body = document.createElement("div");
+        body.className = "menu-body";
+
+        const heading = document.createElement("div");
+        heading.className = "menu-heading";
+        heading.appendChild(createTextElement("h3", "menu-name", item.name));
+        heading.appendChild(createTextElement("span", "menu-price", item.price));
+
+        const description = createTextElement("p", "menu-description", item.description);
+
+        const orderButton = createTextElement("button", "menu-order-button", "Pedir este item");
+        orderButton.type = "button";
+        orderButton.setAttribute("data-whatsapp-action", "item");
+        orderButton.setAttribute("data-item-id", item.id);
+        orderButton.setAttribute("aria-label", `Pedir ${item.name} pelo WhatsApp`);
+
+        body.appendChild(heading);
+        body.appendChild(description);
+        body.appendChild(orderButton);
+
+        article.appendChild(media);
+        article.appendChild(body);
+        return article;
+      }
+
+      // 6. RENDERIZAÇÃO
+      function renderMenuItems(filter = state.activeFilter) {
+        const grid = qs("[data-menu-grid]");
+        if (!grid) {
+          return;
+        }
+
+        const visibleItems = filter === "todos"
+          ? MENU_ITEMS
+          : MENU_ITEMS.filter((item) => item.category === filter);
+
+        while (grid.firstChild) {
+          grid.removeChild(grid.firstChild);
+        }
+
+        visibleItems.forEach((item) => {
+          grid.appendChild(createMenuCard(item));
+        });
+      }
+
+      function updateFilterButtons(activeFilter) {
+        qsa("[data-filter]").forEach((button) => {
+          const isActive = button.dataset.filter === activeFilter;
+          button.classList.toggle("is-active", isActive);
+          button.setAttribute("aria-selected", String(isActive));
+        });
+      }
+
+      function updateConfigText() {
+        qsa("[data-config-field]").forEach((element) => {
+          const field = element.dataset.configField;
+
+          if (field === "company") {
+            element.textContent = CONFIG.COMPANY_NAME;
+          }
+
+          if (field === "phone") {
+            element.textContent = formatPhone(CONFIG.WHATSAPP_NUMBER);
+          }
+
+          if (field === "email") {
+            element.textContent = sanitizeInput(CONFIG.CONTACT_EMAIL, 80);
+          }
+        });
+      }
+
+      function setActiveSection(sectionName, shouldFocus = true, shouldUpdateHistory = true) {
+        if (!SECTION_NAMES.includes(sectionName)) {
+          sectionName = "home";
+        }
+
+        state.activeSection = sectionName;
+
+        qsa("[data-section]").forEach((section) => {
+          const isActive = section.dataset.section === sectionName;
+          section.classList.toggle("active", isActive);
+          section.setAttribute("aria-hidden", String(!isActive));
+        });
+
+        qsa("[data-section-target]").forEach((control) => {
+          const isActive = control.dataset.sectionTarget === sectionName;
+          if (control.classList.contains("nav-link")) {
+            if (isActive) {
+              control.setAttribute("aria-current", "page");
+            } else {
+              control.removeAttribute("aria-current");
+            }
+          }
+        });
+
+        closeMobileMenu();
+        if (shouldUpdateHistory && window.location.hash !== `#${sectionName}`) {
+          window.history.pushState({ section: sectionName }, "", `#${sectionName}`);
+        }
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        if (shouldFocus) {
+          const activeSection = qs(`[data-section="${sectionName}"]`);
+          if (activeSection) {
+            window.setTimeout(() => activeSection.focus({ preventScroll: true }), 120);
+          }
+        }
+      }
+
+      function setFeedback(message, type) {
+        const feedback = qs("[data-form-feedback]");
+        if (!feedback) {
+          return;
+        }
+        feedback.classList.remove("is-success", "is-error");
+        if (type) {
+          feedback.classList.add(`is-${type}`);
+        }
+        feedback.textContent = message;
+      }
+
+      // 7. EVENTOS
+      function bindEvents() {
+        document.addEventListener("click", handleDocumentClick);
+        window.addEventListener("resize", debounce(updateHeaderHeight, 160), { passive: true });
+        window.addEventListener("popstate", handlePopState);
+        document.addEventListener("keydown", handleKeyboard);
+
+        const form = qs("[data-contact-form]");
+        if (form) {
+          form.addEventListener("submit", handleContactSubmit);
+        }
+      }
+
+      function handleDocumentClick(event) {
+        const sectionControl = event.target.closest("[data-section-target]");
+        if (sectionControl) {
+          event.preventDefault();
+          setActiveSection(sectionControl.dataset.sectionTarget);
+          return;
+        }
+
+        const filterControl = event.target.closest("[data-filter]");
+        if (filterControl) {
+          event.preventDefault();
+          applyMenuFilter(filterControl.dataset.filter);
+          return;
+        }
+
+        const menuToggle = event.target.closest(".menu-toggle");
+        if (menuToggle) {
+          event.preventDefault();
+          toggleMobileMenu();
+          return;
+        }
+
+        const whatsappControl = event.target.closest("[data-whatsapp-action]");
+        if (whatsappControl) {
+          event.preventDefault();
+          handleWhatsAppAction(whatsappControl);
+        }
+      }
+
+      function handleKeyboard(event) {
+        if (event.key === "Escape" && state.menuOpen) {
+          closeMobileMenu();
+          const toggle = qs(".menu-toggle");
+          if (toggle) {
+            toggle.focus();
+          }
+        }
+      }
+
+      function handlePopState() {
+        const sectionFromHash = getSectionFromHash();
+        setActiveSection(sectionFromHash, false, false);
+      }
+
+      function handleContactSubmit(event) {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const submitButton = qs("[data-submit-button]", form);
+
+        if (state.formLocked) {
+          return;
+        }
+
+        if (!validateContactForm(form)) {
+          form.reportValidity();
+          return;
+        }
+
+        state.formLocked = true;
+        setButtonLoading(submitButton, true, "Carregando...");
+
+        const formData = new FormData(form);
+        const name = sanitizeInput(formData.get("name"), 60);
+        const phone = sanitizeInput(formData.get("phone"), 20);
+        const message = sanitizeInput(formData.get("message"), 500);
+        const completeMessage = buildContactMessage(name, phone, message);
+
+        setFeedback("Tudo certo. Abrindo seu atendimento no WhatsApp...", "success");
+        openSecureWhatsApp(completeMessage);
+
+        window.setTimeout(() => {
+          state.formLocked = false;
+          setButtonLoading(submitButton, false, "Enviar pelo WhatsApp");
+          form.reset();
+        }, 3000);
+      }
+
+      function applyMenuFilter(filter) {
+        if (!["todos", "burgers", "acompanhamentos", "bebidas"].includes(filter)) {
+          filter = "todos";
+        }
+
+        state.activeFilter = filter;
+        updateFilterButtons(filter);
+
+        const grid = qs("[data-menu-grid]");
+        if (!grid) {
+          return;
+        }
+
+        grid.classList.add("is-switching");
+        window.setTimeout(() => {
+          renderMenuItems(filter);
+          grid.classList.remove("is-switching");
+        }, 160);
+      }
+
+      function toggleMobileMenu() {
+        setMobileMenuState(!state.menuOpen);
+      }
+
+      function closeMobileMenu() {
+        setMobileMenuState(false);
+      }
+
+      function setMobileMenuState(isOpen) {
+        state.menuOpen = isOpen;
+        document.body.classList.toggle("menu-open", isOpen);
+
+        const nav = qs("#primary-navigation");
+        const toggle = qs(".menu-toggle");
+
+        if (nav) {
+          nav.classList.toggle("is-open", isOpen);
+        }
+
+        if (toggle) {
+          toggle.setAttribute("aria-expanded", String(isOpen));
+          toggle.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
+        }
+      }
+
+      function handleWhatsAppAction(control) {
+        const action = control.dataset.whatsappAction;
+        const item = MENU_ITEMS.find((menuItem) => menuItem.id === control.dataset.itemId);
+
+        if (action === "item" && item) {
+          openSecureWhatsApp(`Olá, meu nome é Cliente.\n\nQuero pedir: ${item.name} - ${item.price}.`);
+          return;
+        }
+
+        if (action === "pedido") {
+          openSecureWhatsApp("Olá, meu nome é Cliente.\n\nQuero fazer um pedido na salt pepper.");
+          return;
+        }
+
+        openSecureWhatsApp("Olá, meu nome é Cliente.\n\nTenho uma dúvida sobre o cardápio da salt pepper.");
+      }
+
+      // 8. SEGURANÇA
+      function sanitizeInput(value, maxLength) {
+        const rawValue = String(value || "").normalize("NFKC").slice(0, maxLength);
+        return rawValue
+          .replace(/\b(?:j\s*a\s*v\s*a\s*s\s*c\s*r\s*i\s*p\s*t|d\s*a\s*t\s*a|v\s*b\s*s\s*c\s*r\s*i\s*p\s*t)\s*:/gi, "")
+          .replace(/[<>&"'`]/g, " ")
+          .replace(/[\u0000-\u001F\u007F]/g, " ")
+          .replace(/\s{2,}/g, " ")
+          .trim();
+      }
+
+      function containsUnsafePattern(value) {
+        const text = String(value || "").normalize("NFKC");
+        return /[<>`]/.test(text) || /\b(?:j\s*a\s*v\s*a\s*s\s*c\s*r\s*i\s*p\s*t|d\s*a\s*t\s*a|v\s*b\s*s\s*c\s*r\s*i\s*p\s*t)\s*:/i.test(text);
+      }
+
+      function validateContactForm(form) {
+        const nameField = qs("#contact-name", form);
+        const phoneField = qs("#contact-phone", form);
+        const messageField = qs("#contact-message", form);
+
+        [nameField, phoneField, messageField].forEach((field) => {
+          if (field) {
+            field.setCustomValidity("");
+          }
+        });
+
+        const name = nameField ? nameField.value.trim() : "";
+        const phone = phoneField ? phoneField.value.trim() : "";
+        const message = messageField ? messageField.value.trim() : "";
+
+        if (!form.checkValidity()) {
+          setFeedback("Revise os campos destacados antes de enviar.", "error");
+          return false;
+        }
+
+        if (containsUnsafePattern(name) || containsUnsafePattern(message) || containsUnsafePattern(phone)) {
+          if (messageField) {
+            messageField.setCustomValidity("Remova caracteres ou protocolos inseguros da mensagem.");
+          }
+          setFeedback("Remova caracteres ou protocolos inseguros antes de enviar.", "error");
+          return false;
+        }
+
+        if (!/^[A-Za-zÀ-ÿ0-9\s'.-]{2,60}$/.test(name)) {
+          if (nameField) {
+            nameField.setCustomValidity("Use de 2 a 60 caracteres válidos no nome.");
+          }
+          setFeedback("Use um nome válido para continuar.", "error");
+          return false;
+        }
+
+        if (phone && !/^\+?[0-9\s().-]{8,20}$/.test(phone)) {
+          if (phoneField) {
+            phoneField.setCustomValidity("Informe um telefone válido ou deixe o campo vazio.");
+          }
+          setFeedback("Informe um telefone válido ou deixe o campo vazio.", "error");
+          return false;
+        }
+
+        if (message.length < 10 || message.length > 500) {
+          if (messageField) {
+            messageField.setCustomValidity("A mensagem precisa ter entre 10 e 500 caracteres.");
+          }
+          setFeedback("A mensagem precisa ter entre 10 e 500 caracteres.", "error");
+          return false;
+        }
+
+        return true;
+      }
+
+      function buildContactMessage(name, phone, message) {
+        const lines = [
+          `Olá, meu nome é ${name}.`,
+          "",
+          message
+        ];
+
+        if (phone) {
+          lines.push("", `Telefone para retorno: ${phone}`);
+        }
+
+        return lines.join("\n");
+      }
+
+      function getSafeImageUrl(value) {
+        try {
+          const url = new URL(String(value));
+          if (url.protocol === "https:" && url.hostname === "images.unsplash.com") {
+            return url.toString();
+          }
+        } catch (error) {
+          return createFallbackImage();
+        }
+        return createFallbackImage();
+      }
+
+      function createFallbackImage() {
+        return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='600' viewBox='0 0 900 600'%3E%3Crect width='900' height='600' fill='%23c4121f'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='white' font-family='Arial' font-size='44' font-weight='700'%3Esalt pepper%3C/text%3E%3C/svg%3E";
+      }
+
+      function getSafeWhatsAppNumber() {
+        return String(CONFIG.WHATSAPP_NUMBER || "").replace(/\D/g, "").slice(0, 15);
+      }
+
+      function createWhatsAppUrl(message) {
+        const number = getSafeWhatsAppNumber();
+        const safeMessage = sanitizeInput(message, 800);
+        const encodedMessage = encodeURIComponent(safeMessage);
+        return `https://wa.me/${number}?text=${encodedMessage}`;
+      }
+
+      function openSecureWhatsApp(message) {
+        const number = getSafeWhatsAppNumber();
+        if (!number) {
+          setFeedback("WhatsApp indisponível no momento. Tente novamente em instantes.", "error");
+          return;
+        }
+
+        const url = createWhatsAppUrl(message);
+        const popup = window.open(url, "_blank", "noopener,noreferrer");
+        if (popup) {
+          popup.opener = null;
+        }
+      }
+
+      function formatPhone(value) {
+        const digits = String(value || "").replace(/\D/g, "");
+        if (digits.length < 12) {
+          return digits;
+        }
+        const country = digits.slice(0, 2);
+        const area = digits.slice(2, 4);
+        const first = digits.slice(4, 9);
+        const last = digits.slice(9, 13);
+        return `+${country} (${area}) ${first}-${last}`;
+      }
+
+      function getSectionFromHash() {
+        const section = window.location.hash.replace("#", "").trim();
+        return SECTION_NAMES.includes(section) ? section : "home";
+      }
+
+      // 9. INICIALIZAÇÃO
+      function init() {
+        updateHeaderHeight();
+        updateConfigText();
+        renderMenuItems();
+        bindEvents();
+        setActiveSection(getSectionFromHash(), false, false);
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
